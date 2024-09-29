@@ -4,7 +4,9 @@ from fastapi.responses import StreamingResponse
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 import uvicorn
-from asyncio import sleep
+import os
+from dotenv import load_dotenv
+load_dotenv()
 
 app = FastAPI()
 
@@ -23,7 +25,7 @@ w = RAGWorkflow()
 w._timeout = 120.0
 
 async def RAG_chat(w, query):
-    retriever = await w.run(collection_name="cook_book")
+    retriever = await w.run(collection_name=os.getenv("COLLECTION_NAME"))
     result = await w.run(query=query, retriever=retriever)
     async for chunk in result.async_response_gen():
         yield chunk

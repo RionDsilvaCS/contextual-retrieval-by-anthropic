@@ -18,7 +18,7 @@ class RetrieverEvent(Event):
 
     nodes: list[NodeWithScore]
 
-
+# prompt template
 template = (
     "The below provided is the context from a bunch of cook books \n"
     "---------------------\n"
@@ -29,6 +29,7 @@ template = (
 
 qa_template = PromptTemplate(template)
 
+# RAG using workflow
 class RAGWorkflow(Workflow):
     
     @step

@@ -1,8 +1,11 @@
 from src.contextual_retrieval import create_and_save_db
+import os
+from dotenv import load_dotenv
+load_dotenv()
 
-data_dir = "/home/rion/agents/contextual-retrieval-by-anthropic/data"
-save_dir = "/home/rion/agents/contextual-retrieval-by-anthropic/src/db"
-collection_name = "cook_book"
+data_dir = os.getenv("DATA_DIR")
+save_dir = os.getenv("SAVE_DIR")
+collection_name = os.getenv("COLLECTION_NAME")
 db_name = "cook_book_db"
 
 create_and_save_db(

@@ -8,7 +8,9 @@ from llama_index.core.retrievers import BaseRetriever
 import chromadb
 import Stemmer
 from typing import List
-
+import os
+from dotenv import load_dotenv
+load_dotenv()
 
 class SemanticBM25Retriever(BaseRetriever):
     def __init__(self, collection_name: str = "default", mode: str = "OR") -> None:
@@ -16,8 +18,8 @@ class SemanticBM25Retriever(BaseRetriever):
         self._mode = mode
 
         # Path to database directories
-        VECTOR_DB_PATH = "/home/rion/agents/contextual-retrieval-by-anthropic/src/db/cook_book_db_vectordb"
-        BM25_DB_PATH = "/home/rion/agents/contextual-retrieval-by-anthropic/src/db/cook_book_db_bm25"
+        VECTOR_DB_PATH = os.getenv("VECTOR_DB_PATH")
+        BM25_DB_PATH = os.getenv("BM25_DB_PATH")
 
         # Embedding Model
         self._embed_model = HuggingFaceEmbedding(model_name="BAAI/bge-base-en-v1.5")
